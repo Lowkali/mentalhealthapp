@@ -9,7 +9,7 @@ class Exercise extends StatelessWidget {
   final icon;
 
   Exercise(
-      {this.icon,
+      {required this.icon,
       required this.color,
       required this.exerciseType,
       required this.numberOfExercises});
@@ -35,7 +35,7 @@ class Exercise extends StatelessWidget {
                       padding: EdgeInsets.all(16),
                       color: color,
                       child: Icon(
-                        Icons.favorite,
+                        icon,
                         color: Colors.white,
                       )),
                 ),
@@ -62,7 +62,10 @@ class Exercise extends StatelessWidget {
                 )
               ],
             ),
-            Icon(Icons.more_horiz)
+            Icon(
+              Icons.more_horiz,
+              color: color,
+            )
           ],
         ),
       ),
