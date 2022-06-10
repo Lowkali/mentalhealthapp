@@ -19,6 +19,13 @@ class _HomePageState extends State<HomePage> {
     ['😂', 'Joy'],
     ['😩', 'Anxious'],
   ];
+
+  final List exercises = [
+    [Icon(Icons.favorite), Colors.orange, 'Speaking exercises', 16],
+    [Icon(Icons.task_alt), Colors.purple, 'Reading exercises', 12],
+    [Icon(Icons.mosque), Colors.lime, 'Religious exercises', 6],
+    [Icon(Icons.sports_soccer), Colors.red, 'Outoor exercises', 21]
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,7 +201,18 @@ class _HomePageState extends State<HomePage> {
                       ),
 
                       //list of exercises
-                      Exercise()
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: exercises.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Exercise(
+                                // icon: exercises[index][0],
+                                color: exercises[index][1],
+                                exerciseType: exercises[index][2],
+                                numberOfExercises: exercises[index][3]);
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 )),
