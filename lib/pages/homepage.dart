@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:mentalhealthapp/util/emoticon_face.dart';
+import 'package:mentalhealthapp/util/exercise.dart';
+// import 'package:mentalhealthapp/util/exercise.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -15,31 +17,40 @@ class _HomePageState extends State<HomePage> {
     ['😃', 'Happy'],
     ['😞', 'Sad'],
     ['😂', 'Joy'],
-    ['😩', 'Anxious']
+    ['😩', 'Anxious'],
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+        //  bottom navigation bar
+        bottomNavigationBar: BottomNavigationBar(items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Messages'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
+        ]),
         backgroundColor: Colors.blue[800],
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(25),
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: EdgeInsets.all(12),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Grettings row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Hi, mi Breddda!',
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Padding(
+                          padding: EdgeInsets.only(top: 30),
+                          child: Text(
+                            'Hi, mi Breddda!',
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ),
                         SizedBox(
                           height: 4,
@@ -95,14 +106,14 @@ class _HomePageState extends State<HomePage> {
                 ),
 
                 SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'How do you feeling today?',
+                      'How do you feel today?',
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -115,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
 
                 // emoji faces
@@ -123,18 +134,20 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 200,
+                      height: 120,
                       child: GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 4,
                         ),
-                        itemCount: 4,
+                        itemCount: feelings.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
                             padding: EdgeInsets.only(
-                                right: index == feelings.length - 1 ? 0 : 8),
+                              right: index == feelings.length - 1 ? 0 : 8,
+                              bottom: 2,
+                            ),
                             child: EmoticonFace(
                               emoji: feelings[index][0],
                               emoji_feeling: feelings[index][1],
@@ -148,6 +161,44 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-        ));
+          SizedBox(
+            height: 20,
+          ),
+          Expanded(
+              child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+              color: Colors.grey[200],
+            ),
+            child: Padding(
+                padding: EdgeInsets.all(25),
+                child: Center(
+                  child: Column(
+                    children: [
+                      // exercices heading
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Exercises',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          Icon(
+                            Icons.more_horiz,
+                            color: Colors.blue[800],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                      //list of exercises
+                      Exercise()
+                    ],
+                  ),
+                )),
+          ))
+        ]));
   }
 }

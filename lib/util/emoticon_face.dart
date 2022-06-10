@@ -18,13 +18,13 @@ class EmoticonFace extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.only(top: 18),
             child: Text(
               emoji,
               style: TextStyle(fontSize: 25),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Text(
             emoji_feeling,
             style: TextStyle(
